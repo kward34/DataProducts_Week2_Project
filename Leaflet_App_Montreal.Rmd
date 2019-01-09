@@ -1,0 +1,36 @@
+---
+title: "Leaflet Application - Montreal"
+author: "Kyle Ward"
+date: "January 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Montreal - Sight Seeing Tour
+
+```{r leaflet markers, echo=FALSE, warning=FALSE, message=FALSE}
+library(leaflet)
+MontrealLatLong <- data.frame(
+  lat = c(45.507282,45.502655,45.504528,45.512459, 45.560194,45.492586,45.51707,45.517457,45.504088),
+  long = c(-73.587493,-73.554167,-73.556124,-73.548477, -73.563104,-73.618337,-73.533576,-73.569482,-73.554414),
+  color=c("blue","blue", "blue", "blue", "blue","blue", "blue", "blue", "yellow"))
+
+MontrealSites <- c(
+  "<a href='https://en.wikipedia.org/wiki/Mount_Royal'>Mont-Royal",
+  "<a href='https://en.wikip'edia.org/wiki/Pointe-%C3%A0-Calli%C3%A8re_Museum'>Pointe-à-Callière Museum",
+  "<a href='https://en.wikipedia.org/wiki/Notre-Dame_Basilica_(Montreal)'>Notre-Dame Basilica",
+  "<a href='https://en.wikipedia.org/wiki/Old_Port_of_Montreal'>Old Port Montreal",
+  "<a href='https://en.wikipedia.org/wiki/Montreal_Botanical_Garden'>Jardin Botanique",
+  "<a href='https://en.wikipedia.org/wiki/Saint_Joseph%27s_Oratory'>Oratoire Saint-Joseph",
+  "<a href='https://en.wikipedia.org/wiki/Parc_Jean-Drapeau'>Parc Jean-Drapeau",
+  "<a href='https://en.wikipedia.org/wiki/Saint-Louis_Square'>Square Saint-Louis and Rue Denis",
+  "<a href='http://hotelnelligan.com/en/'>Hotel Nelligan")
+MontrealLatLong %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(color= MontrealLatLong$color, popup = MontrealSites,) %>%
+  addLegend(labels= c("Attraction","Hotel"), colors=c("blue", "yellow"))
+```
